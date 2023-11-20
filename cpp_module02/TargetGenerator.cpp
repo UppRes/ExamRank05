@@ -3,10 +3,13 @@
 
 void TargetGenerator::learnTargetType(ATarget *enemy)
 {
-    std::map<std::string, ATarget *>::iterator it = target.find(enemy->getType());
+    if (enemy != nullptr)
+    {
+        std::map<std::string, ATarget *>::iterator it = target.find(enemy->getType());
 
-    if (it == target.end())
-        target[enemy->getType()] = enemy->clone();
+        if (it == target.end())
+            target[enemy->getType()] = enemy;
+    }
 }
 
 void TargetGenerator::forgetTargetType(const std::string &enemy_type)
@@ -14,10 +17,7 @@ void TargetGenerator::forgetTargetType(const std::string &enemy_type)
     std::map<std::string, ATarget *>::iterator it = target.find(enemy_type);
 
     if (it != target.end())
-    {
-        delete it->second;
         target.erase(enemy_type);
-    }
 }
 
 ATarget *TargetGenerator::createTarget(const std::string &enemy_type)

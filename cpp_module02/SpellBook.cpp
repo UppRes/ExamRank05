@@ -3,10 +3,13 @@
 
 void SpellBook::learnSpell(ASpell *mag)
 {
-    std::map<std::string, ASpell *>::iterator it = spell.find(mag->getName());
+    if (mag != nullptr)
+    {
+        std::map<std::string, ASpell *>::iterator it = spell.find(mag->getName());
 
-    if (it == spell.end())
-        spell[mag->getName()] = mag->clone();
+        if (it == spell.end())
+            spell[mag->getName()] = mag->clone();
+    }
 }
 
 void SpellBook::forgetSpell(const std::string &magname)
