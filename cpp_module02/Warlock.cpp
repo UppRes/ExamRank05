@@ -34,7 +34,13 @@ void Warlock::forgetSpell(std::string magname)
 
 void Warlock::launchSpell(std::string magname, const ATarget &src)
 {
-    spell_book.createSpell(magname)->launch(src);
+    ASpell *tmp = spell_book.createSpell(magname);
+
+    if (tmp != nullptr)
+    {
+        tmp->launch(src);
+        delete tmp;
+    }
 }
 
 Warlock::Warlock(const std::string &name, const std::string &title):name(name), title(title)

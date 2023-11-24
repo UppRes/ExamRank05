@@ -10,3 +10,4 @@ ATarget *Dummy::clone() const
 {
     return (new Dummy());
 }
+   
